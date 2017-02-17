@@ -1,0 +1,42 @@
+version: "2"
+
+services:
+  web:
+    extends:
+      file: docker-compose-base.yml
+      service: base
+    command: gunicorn cabot.wsgi:application -b 0.0.0.0:5000
+    ports:
+      - '5000:5000'
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  worker:
+    extends:
+      file: docker-compose-base.yml
+      service: base
+    command: celery worker -A cabot
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  beat:
+    extends:
+      file: docker-compose-base.yml
+      service: base
+    command: celery beat -A cabot
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  postgres:
+    image: postgres:9.6-alpine
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3.6-alpine
+
+volumes:
+  data:

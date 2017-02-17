@@ -1,0 +1,7 @@
+version: "2"
+
+services:
+  base:
+    image: cabot:${CABOT_VERSION}
+    env_file:
+      - conf/default.env
