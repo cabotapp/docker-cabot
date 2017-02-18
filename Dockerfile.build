@@ -24,8 +24,7 @@ RUN npm install -g \
 
 RUN pip install --upgrade pip wheel
 
-ENV BREAK 1
-ENV CABOT_VERSION pypi
+ENV CABOT_VERSION 0.8.4
 
 RUN git clone --branch=${CABOT_VERSION} https://github.com/arachnys/cabot /code
 
