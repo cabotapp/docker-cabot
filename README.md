@@ -1,3 +1,41 @@
-Cabot Docker
-============
+# Supported tags and respective Dockerfile links
 
+- `0.8.4`, `latest` [(0.8.4/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/master/0.8.4/Dockerfile)
+
+## What is Cabot?
+
+Cabot is a free, open-source, self-hosted infrastructure monitoring platform that provides some of the best features of [PagerDuty](http://www.pagerduty.com), [Server Density](http://www.serverdensity.com), [Pingdom](http://www.pingdom.com) and [Nagios](http://www.nagios.org) without their cost and complexity.
+
+> [github.com/arachnys/cabot](https://github.com/arachnys/cabot)
+
+# How to use this image
+
+- Create a Cabot configuration file from the [example in the cabot repository](https://github.com/arachnys/cabot/blob/master/conf/production.env.example)
+
+- Start a Redis container (or any [Celery Broker](http://docs.celeryproject.org/en/latest/getting-started/brokers/))
+
+> `$ docker run -d --name cabot-redis redis`
+
+- Start a Postgres container
+
+> `$ docker run -d --name cabot-postgres postgres`
+
+- Run the initial database migrations
+
+> `$ docker run --rm --env-file production.conf --link cabot-postgres:postgres cabotapp/cabot python /manage.py migrate`
+
+- Start the cabot webserver
+
+> `$ docker run -d --name cabot-web --env-file production.conf  --link cabot-postgres:postgres --link cabot-redis:redis -p 5000:5000 cabotapp/cabot gunicorn cabot.wsgi:application -b 0.0.0.0:5000`
+
+- You also need a celery worker and scheduler to run the status checks
+
+> `$ docker run -d --name cabot-worker --env-file production.conf  --link cabot-postgres:postgres --link cabot-redis:redis cabotapp/cabot celery worker -A cabot`
+
+> `$ docker run -d --name cabot-beat --env-file production.conf  --link cabot-postgres:postgres --link cabot-redis:redis cabotapp/cabot celery beat -A cabot`
+
+# Issues
+
+If you have any problems using these images please make a github issue on [cabotapp/docker-cabot](https://github.com/cabotapp/docker-cabot/issues).
+
+For any problems relating to Cabot itself, please make issues on [arachnys/cabot](https://github.com/arachnys/cabot/issues)
