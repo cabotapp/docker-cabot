@@ -1,5 +1,6 @@
 # Supported tags and respective Dockerfile links
 
+- `0.8.5`, `latest` [(0.8.5/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/master/0.8.5/Dockerfile)
 - `0.8.4`, `latest` [(0.8.4/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/master/0.8.4/Dockerfile)
 
 ## What is Cabot?

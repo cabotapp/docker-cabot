@@ -6,3 +6,4 @@ docker run --rm -v `pwd`/build:/build cabot-build "cp /code/dist/*.whl /build/"
 CABOT_VERSION=`docker run --rm cabot-build 'git describe --tags'`
 cp build/*.whl $CABOT_VERSION/
 docker build --squash -t cabotapp/cabot -t cabotapp/cabot:$CABOT_VERSION -f $CABOT_VERSION/Dockerfile $CABOT_VERSION/
+echo "Successfully built image cabotapp/cabot:$CABOT_VERSION"
