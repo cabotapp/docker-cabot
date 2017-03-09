@@ -46,6 +46,10 @@ You can set up a complete cabot stack easily using docker-compose.
 
 - Copy your cabot config to conf/production.conf
 
+- Run the migrations
+
+> `docker-compose run --rm web python /manage.py migrate`
+
 - Run `docker-compose up -d`
 
 By default the compose file only binds on localhost. We recommend putting it behind a reverse proxy such as [nginx](https://www.nginx.com) or [Caddy](https://caddyserver.com/), but if you want you can change it to bind publicly on port 80.
