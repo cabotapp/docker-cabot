@@ -36,6 +36,22 @@ Cabot is a free, open-source, self-hosted infrastructure monitoring platform tha
 
 > `$ docker run -d --name cabot-beat --env-file production.conf  --link cabot-postgres:postgres --link cabot-redis:redis cabotapp/cabot celery beat -A cabot`
 
+# Using docker-compose
+
+You can set up a complete cabot stack easily using docker-compose.
+
+- Clone the docker-cabot repository
+
+> `git clone https://github.com/cabotapp/docker-cabot`
+
+- Copy your cabot config to conf/production.conf
+
+- Run `docker-compose up -d`
+
+By default the compose file only binds on localhost. We recommend putting it behind a reverse proxy such as [nginx](https://www.nginx.com) or [Caddy](https://caddyserver.com/), but if you want you can change it to bind publicly on port 80.
+
+There is a [Caddyfile](https://github.com/cabotapp/docker-cabot/blob/master/Caddyfile) included which will automatically set up HTTPS using [Let's Encrypt](https://letsencrypt.org/).
+
 # Issues
 
 If you have any problems using these images please make a github issue on [cabotapp/docker-cabot](https://github.com/cabotapp/docker-cabot/issues).
