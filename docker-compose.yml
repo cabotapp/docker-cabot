@@ -13,8 +13,6 @@ services:
     depends_on:
       - postgres
       - rabbitmq
-    env_file:
-      - conf/${CABOT_ENVIRONMENT}.conf
 
   worker:
     extends:
@@ -25,8 +23,6 @@ services:
       - web
       - postgres
       - rabbitmq
-    env_file:
-      - conf/${CABOT_ENVIRONMENT}.conf
 
   beat:
     extends:
@@ -37,8 +33,6 @@ services:
       - web
       - postgres
       - rabbitmq
-    env_file:
-      - conf/${CABOT_ENVIRONMENT}.conf
 
   postgres:
     image: postgres:9.6-alpine
