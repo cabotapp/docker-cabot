@@ -7,7 +7,7 @@ services:
       service: base
     command: sh -c "cabot migrate && gunicorn cabot.wsgi:application -b 0.0.0.0:5000"
     healthcheck:
-      test: "!(cabot showmigrations -p | grep '\\[ \\]')"
+      test: "curl http://localhost:5000/status"
     ports:
       - '127.0.0.1:5000:5000'
     depends_on:
