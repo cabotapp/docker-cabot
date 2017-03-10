@@ -12,7 +12,7 @@ services:
       - postgres
       - rabbitmq
     env_file:
-      - conf/production.conf
+      - conf/${CABOT_ENVIRONMENT}.conf
 
   worker:
     extends:
@@ -23,7 +23,7 @@ services:
       - postgres
       - rabbitmq
     env_file:
-      - conf/production.conf
+      - conf/${CABOT_ENVIRONMENT}.conf
 
   beat:
     extends:
@@ -34,7 +34,7 @@ services:
       - postgres
       - rabbitmq
     env_file:
-      - conf/production.conf
+      - conf/${CABOT_ENVIRONMENT}.conf
 
   postgres:
     image: postgres:9.6-alpine
