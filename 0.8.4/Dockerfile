@@ -9,10 +9,7 @@ RUN apk add --no-cache \
         openldap-dev \
         ca-certificates
 
-ADD cabot-0.8.4-py2-none-any.whl /tmp/
-
-RUN pip install --no-cache-dir --disable-pip-version-check /tmp/cabot-0.8.4-py2-none-any.whl \
- && rm /tmp/cabot-0.8.4-py2-none-any.whl
+RUN pip install --no-cache-dir --disable-pip-version-check cabot==0.8.4
 
 RUN apk del \
         python-dev \
@@ -20,8 +17,6 @@ RUN apk del \
         musl-dev \
         libffi-dev \
         openldap-dev
-
-ADD manage.py /manage.py
 
 ENTRYPOINT []
 CMD ["/bin/sh"]
