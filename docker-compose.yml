@@ -1,11 +1,13 @@
-version: "2"
+version: "2.1"
 
 services:
   web:
     extends:
       file: docker-compose-base.yml
       service: base
-    command: gunicorn cabot.wsgi:application -b 0.0.0.0:5000
+    command: sh -c "cabot migrate && gunicorn cabot.wsgi:application -b 0.0.0.0:5000"
+    healthcheck:
+      test: "!(cabot showmigrations -p | grep '\\[ \\]')"
     ports:
       - '127.0.0.1:5000:5000'
     depends_on:
@@ -20,6 +22,7 @@ services:
       service: base
     command: celery worker -A cabot
     depends_on:
+      - web
       - postgres
       - rabbitmq
     env_file:
@@ -31,6 +34,7 @@ services:
       service: base
     command: celery beat -A cabot
     depends_on:
+      - web
       - postgres
       - rabbitmq
     env_file:
