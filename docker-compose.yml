@@ -38,9 +38,11 @@ services:
     image: postgres:9.6-alpine
     volumes:
       - data:/var/lib/postgresql/data
+    restart: always
 
   rabbitmq:
     image: rabbitmq:3.6-alpine
+    restart: always
 
 volumes:
   data:
