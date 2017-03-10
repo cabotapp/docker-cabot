@@ -6,7 +6,4 @@ services:
     env_file:
       - conf/default.env
       - conf/${CABOT_ENVIRONMENT}.env
-    restart_policy:
-      condition: always
-      delay: 5s
-      max_attempts: 3
+    restart: always
