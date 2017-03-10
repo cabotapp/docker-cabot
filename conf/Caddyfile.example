@@ -1,5 +1,5 @@
 cabot.example.com {
-  proxy / http://localhost:5000 {
+  proxy / http://web:5000 {
     header_upstream Host {host}
   }
 }
