@@ -24,7 +24,7 @@ Cabot is a free, open-source, self-hosted infrastructure monitoring platform tha
 
 - Run the initial database migrations
 
-> `$ docker run --rm --env-file production.conf --link cabot-postgres:postgres cabotapp/cabot python /manage.py migrate`
+> `$ docker run --rm --env-file production.conf --link cabot-postgres:postgres cabotapp/cabot python manage.py migrate`
 
 - Start the cabot webserver
 
@@ -48,7 +48,7 @@ You can set up a complete cabot stack easily using docker-compose.
 
 - Run the migrations
 
-> `docker-compose run --rm web python /manage.py migrate`
+> `docker-compose run --rm web python manage.py migrate`
 
 - Run `docker-compose up -d`
 
