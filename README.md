@@ -24,17 +24,17 @@ Cabot is a free, open-source, self-hosted infrastructure monitoring platform tha
 
 - Run the initial database migrations
 
-> `$ docker run --rm --env-file production.conf --link cabot-postgres:postgres cabotapp/cabot cabot migrate`
+> `$ docker run --rm --env-file production.env --link cabot-postgres:postgres cabotapp/cabot cabot migrate`
 
 - Start the cabot webserver
 
-> `$ docker run -d --name cabot-web --env-file production.conf  --link cabot-postgres:postgres --link cabot-redis:redis -p 5000:5000 cabotapp/cabot gunicorn cabot.wsgi:application -b 0.0.0.0:5000`
+> `$ docker run -d --name cabot-web --env-file production.env  --link cabot-postgres:postgres --link cabot-redis:redis -p 5000:5000 cabotapp/cabot gunicorn cabot.wsgi:application -b 0.0.0.0:5000`
 
 - You also need a celery worker and scheduler to run the status checks
 
-> `$ docker run -d --name cabot-worker --env-file production.conf  --link cabot-postgres:postgres --link cabot-redis:redis cabotapp/cabot celery worker -A cabot`
+> `$ docker run -d --name cabot-worker --env-file production.env  --link cabot-postgres:postgres --link cabot-redis:redis cabotapp/cabot celery worker -A cabot`
 
-> `$ docker run -d --name cabot-beat --env-file production.conf  --link cabot-postgres:postgres --link cabot-redis:redis cabotapp/cabot celery beat -A cabot`
+> `$ docker run -d --name cabot-beat --env-file production.env  --link cabot-postgres:postgres --link cabot-redis:redis cabotapp/cabot celery beat -A cabot`
 
 # Using docker-compose
 
@@ -44,7 +44,7 @@ You can set up a complete cabot stack easily using docker-compose.
 
 > `git clone https://github.com/cabotapp/docker-cabot`
 
-- Copy your cabot config to conf/production.conf
+- Copy your cabot config to conf/production.env
 
 - Run `docker-compose up -d`
 
