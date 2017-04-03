@@ -1,6 +1,6 @@
 # Supported tags and respective Dockerfile links
 
-- `0.10.1`, `latest` [(0.10.1/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/master/0.10.1/Dockerfile)
+- `0.10.2`, `latest` [(0.10.2/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/master/0.10.2/Dockerfile)
 - `0.9.2` [(0.9.2/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/master/0.9.2/Dockerfile)
 - `0.8.6` [(0.8.6/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/master/0.8.6/Dockerfile)
 - `0.6.0` [(0.6.0/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/master/0.6.0/Dockerfile)
