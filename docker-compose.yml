@@ -5,7 +5,7 @@ services:
     extends:
       file: docker-compose-base.yml
       service: base
-    command: sh -c "cabot migrate && gunicorn cabot.wsgi:application -b 0.0.0.0:5000"
+    command: sh -c "cabot migrate && gunicorn cabot.wsgi:application -b 0.0.0.0:5000 --workers=5"
     healthcheck:
       test: "curl http://localhost:5000/status"
     ports:
