@@ -23,6 +23,8 @@ RUN npm install -g \
         less@1.3
 
 RUN pip install --upgrade pip wheel twine
+# Gevent install is super slow...cache it early
+RUN pip install gevent==1.2.1
 
 ARG CABOT_VERSION
 RUN git clone --branch=${CABOT_VERSION} https://github.com/arachnys/cabot /code

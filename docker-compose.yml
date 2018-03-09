@@ -13,6 +13,7 @@ services:
     depends_on:
       - postgres
       - rabbitmq
+    restart: unless-stopped
 
   worker:
     extends:
@@ -23,6 +24,7 @@ services:
       - web
       - postgres
       - rabbitmq
+    restart: unless-stopped
 
   beat:
     extends:
@@ -33,16 +35,17 @@ services:
       - web
       - postgres
       - rabbitmq
+    restart: unless-stopped
 
   postgres:
     image: postgres:9.6-alpine
     volumes:
       - data:/var/lib/postgresql/data
-    restart: always
+    restart: unless-stopped
 
   rabbitmq:
     image: rabbitmq:3.6-alpine
-    restart: always
+    restart: unless-stopped
 
 volumes:
   data:
