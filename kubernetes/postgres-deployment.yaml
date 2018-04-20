@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cabot-postgres
+  labels:
+    service: cabot-postgres
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: cabot-postgres
+    spec:
+      containers:
+      - image: postgres:9.6-alpine
+        name: postgres
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: data
+        env:
+         - name: PGDATA
+           value: /var/lib/postgresql/data/pgdata
+      restartPolicy: Always
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: cabot-data

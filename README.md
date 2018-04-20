@@ -37,6 +37,16 @@ Cabot is a free, open-source, self-hosted infrastructure monitoring platform tha
 
 > `$ docker run -d --name cabot-beat --env-file production.env  --link cabot-postgres:postgres --link cabot-redis:redis cabotapp/cabot celery beat -A cabot`
 
+# Using kubernetes
+
+Kubernetes files are templated using [kubetpl](https://github.com/shyiko/kubetpl).
+
+To apply them, create a configuration file as above (e.g. conf/production.env) and run
+
+`kubetpl -c . -i .env kubernetes/* | kubectl apply -f -`
+
+This will create all the deployments and services you need including the database. It create's an ingress with SSL enabled using [https://github.com/jetstack/cert-manager](cert-manager) - you may wish to change the ingress or change the `web-service` to be a loadbalancer or node port
+
 # Using docker-compose
 
 You can set up a complete cabot stack easily using docker-compose.

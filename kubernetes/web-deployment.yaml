@@ -1,0 +1,28 @@
+# kubetpl:syntax:$
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cabot-web
+  labels:
+    service: cabot-web
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        service: cabot-web
+    spec:
+      containers:
+      - name: web
+        image: cabotapp/cabot:${CABOT_VERSION}
+        args:
+        - sh
+        - -c
+        - cabot migrate && gunicorn cabot.wsgi:application -b 0.0.0.0:5000 --workers=5
+        envFrom:
+        - configMapRef:
+            name: cabot-default-config
+        - configMapRef:
+            name: cabot-${CABOT_ENVIRONMENT}-config
+      restartPolicy: Always
+status: {}

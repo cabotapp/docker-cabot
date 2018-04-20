@@ -1,4 +1,4 @@
-version: "2.1"
+version: "2"
 
 services:
   web:
@@ -6,14 +6,12 @@ services:
       file: docker-compose-base.yml
       service: base
     command: sh -c "cabot migrate && gunicorn cabot.wsgi:application -b 0.0.0.0:5000 --workers=5"
-    healthcheck:
-      test: "curl http://localhost:5000/status"
     ports:
       - '127.0.0.1:5000:5000'
     depends_on:
       - postgres
       - rabbitmq
-    restart: unless-stopped
+    restart: always
 
   worker:
     extends:
@@ -24,7 +22,7 @@ services:
       - web
       - postgres
       - rabbitmq
-    restart: unless-stopped
+    restart: always
 
   beat:
     extends:
@@ -35,17 +33,17 @@ services:
       - web
       - postgres
       - rabbitmq
-    restart: unless-stopped
+    restart: always
 
   postgres:
     image: postgres:9.6-alpine
     volumes:
       - data:/var/lib/postgresql/data
-    restart: unless-stopped
+    restart: always
 
   rabbitmq:
     image: rabbitmq:3.6-alpine
-    restart: unless-stopped
+    restart: always
 
 volumes:
   data:

@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: cabot-rabbitmq
+  name: cabot-rabbitmq
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: cabot-rabbitmq
+    spec:
+      containers:
+      - image: rabbitmq:3.6-alpine
+        name: rabbitmq
+      restartPolicy: Always

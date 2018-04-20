@@ -1,0 +1,28 @@
+# kubetpl:syntax:$
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cabot-beat
+  labels:
+    service: cabot-beat
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        service: cabot-beat
+    spec:
+      containers:
+      - name: beat
+        image: cabotapp/cabot:${CABOT_VERSION}
+        args:
+        - celery
+        - beat
+        - -A
+        - cabot
+        envFrom:
+        - configMapRef:
+            name: cabot-default-config
+        - configMapRef:
+            name: cabot-${CABOT_ENVIRONMENT}-config
+      restartPolicy: Always
