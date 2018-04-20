@@ -6,7 +6,7 @@ metadata:
   labels:
     service: cabot-web
 spec:
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:

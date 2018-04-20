@@ -2,18 +2,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cabot-beat
+  name: cabot-worker
   labels:
-    service: cabot-beat
+    service: cabot-worker
 spec:
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
-        service: cabot-beat
+        service: cabot-worker
     spec:
       containers:
-      - name: beat
+      - name: worker
         image: cabotapp/cabot:${CABOT_VERSION}
         args:
         - celery
