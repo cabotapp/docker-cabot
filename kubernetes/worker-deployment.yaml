@@ -2,15 +2,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cabot-worker
+  name: worker
+  namespace: cabot
   labels:
-    service: cabot-worker
+    service: worker
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        service: cabot-worker
+        service: worker
     spec:
       containers:
       - name: worker

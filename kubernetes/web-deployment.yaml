@@ -2,15 +2,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cabot-web
+  name: web
+  namespace: cabot
   labels:
-    service: cabot-web
+    service: web
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
-        service: cabot-web
+        service: web
     spec:
       containers:
       - name: web
@@ -22,7 +25,5 @@ spec:
         envFrom:
         - configMapRef:
             name: cabot-default-config
-        - configMapRef:
-            name: cabot-${CABOT_ENVIRONMENT}-config
       restartPolicy: Always
 status: {}

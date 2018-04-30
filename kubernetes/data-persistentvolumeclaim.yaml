@@ -1,7 +1,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: cabot-data
+  name: data
+  namespace: cabot
 spec:
   accessModes:
   - ReadWriteOnce

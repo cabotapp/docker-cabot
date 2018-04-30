@@ -2,14 +2,15 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    service: cabot-rabbitmq
-  name: cabot-rabbitmq
+    service: rabbitmq
+  name: rabbitmq
+  namespace: cabot
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        service: cabot-rabbitmq
+        service: rabbitmq
     spec:
       containers:
       - image: rabbitmq:3.6-alpine

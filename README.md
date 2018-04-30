@@ -1,6 +1,6 @@
 # Supported tags and respective Dockerfile links
 
-- `0.11.10`, `latest` [(0.11.8/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/0.11.8/Dockerfile)
+- `0.11.10`, `latest` [(0.11.10/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/0.11.10/Dockerfile)
 - `0.9.2` [(0.9.2/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/0.9.2/Dockerfile)
 - `0.8.6` [(0.8.6/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/0.8.6/Dockerfile)
 - `0.6.0` [(0.6.0/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/0.6.0/Dockerfile)
@@ -43,7 +43,7 @@ Kubernetes files are templated using [kubetpl](https://github.com/shyiko/kubetpl
 
 To apply them, create a configuration file as above (e.g. conf/production.env) and run
 
-`kubetpl -c . -i .env kubernetes/* | kubectl apply -f -`
+`kubetpl -c . -i .env -s HOST=cabot.example.com kubernetes/* | kubectl apply -f -`
 
 This will create all the deployments and services you need including the database. It create's an ingress with SSL enabled using [https://github.com/jetstack/cert-manager](cert-manager) - you may wish to change the ingress or change the `web-service` to be a loadbalancer or node port
 

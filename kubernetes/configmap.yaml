@@ -1,7 +1,8 @@
 # kubetpl:syntax:$
 apiVersion: v1
-kubetpl/data-from-file:
+kubetpl/data-from-env-file:
   - ../conf/${CABOT_ENVIRONMENT}.env
 kind: ConfigMap
 metadata:
   name: cabot-${CABOT_ENVIRONMENT}-config
+  namespace: cabot

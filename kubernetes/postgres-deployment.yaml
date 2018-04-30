@@ -1,9 +1,10 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cabot-postgres
+  name: postgres
+  namespace: cabot
   labels:
-    service: cabot-postgres
+    service: postgres
 spec:
   replicas: 1
   strategy:
@@ -11,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        service: cabot-postgres
+        service: postgres
     spec:
       containers:
       - image: postgres:9.6-alpine
@@ -26,4 +27,4 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: cabot-data
+          claimName: data
