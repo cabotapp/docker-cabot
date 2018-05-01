@@ -28,3 +28,27 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: cabot
+spec:
+  ports:
+  - name: http-cabot
+    port: 5432
+  selector:
+    service: postgres
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data
+  namespace: cabot
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2000Mi

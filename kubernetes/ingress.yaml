@@ -18,5 +18,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: cabot-web
+          serviceName: web
           servicePort: 5000

@@ -27,3 +27,15 @@ spec:
             name: cabot-default-config
       restartPolicy: Always
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: cabot
+spec:
+  ports:
+  - name: http
+    port: 5000
+  selector:
+    service: web

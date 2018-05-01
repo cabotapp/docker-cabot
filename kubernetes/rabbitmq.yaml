@@ -16,3 +16,14 @@ spec:
       - image: rabbitmq:3.6-alpine
         name: rabbitmq
       restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+  namespace: cabot
+spec:
+  ports:
+  - port: 5672
+  selector:
+    service: rabbitmq
