@@ -6,3 +6,11 @@ kind: ConfigMap
 metadata:
   name: cabot-${CABOT_ENVIRONMENT}-config
   namespace: cabot
+---
+apiVersion: v1
+kubetpl/data-from-env-file:
+  - ../conf/default.env
+kind: ConfigMap
+metadata:
+  name: cabot-default-config
+  namespace: cabot
