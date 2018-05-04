@@ -55,6 +55,8 @@ Simply clone the repository and run
 
 `helm install charts/cabot --set ingress.hostname=cabot.example.com`
 
+You'll need to apply any configuration changes in `charts/cabot/values.yaml`
+
 # Using docker-compose
 
 You can set up a complete cabot stack easily using docker-compose.
