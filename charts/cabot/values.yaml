@@ -1,0 +1,41 @@
+# Default values for cabot.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+webReplicaCount: 2
+workerReplicaCount: 2
+image:
+  repository: cabotapp/cabot
+  tag: 0.11.12
+  pullPolicy: IfNotPresent
+ingress:
+  enabled: true
+  hostname: cabot.local
+  annotations:
+    kubernetes.io/tls-acme: "true"
+  tls:
+    - secretName: cabot-tls
+resources: {}
+cabot:
+  CABOT_PLUGINS_ENABLED: cabot_alert_hipchat,cabot_alert_twilio,cabot_alert_email,cabot_alert_slack
+  DJANGO_SETTINGS_MODULE: cabot.settings
+  HTTP_USER_AGENT: Cabot
+  LOG_FILE: /dev/null
+  ADMIN_EMAIL: admin@example.com
+  CABOT_FROM_EMAIL: cabot@example.com
+  EMAIL_HOST: smtp.gmail.com
+  EMAIL_PASSWORD: '*********'
+  EMAIL_PORT: "587"
+  EMAIL_USE_TLS: "1"
+  EMAIL_USER: '********@gmail.com'
+  WWW_HTTP_HOST: cabot.local
+  WWW_SCHEME: https
+
+postgresql:
+  postgresUser: "cabot"
+  postgresPassword: "cabot"
+  postgresDatabase: "cabot"
+
+rabbitmq:
+  rabbitmq:
+    password: "cabot"
+    username: "cabot"

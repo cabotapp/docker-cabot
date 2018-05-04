@@ -1,0 +1,5 @@
+Cabot has been deployed!
+
+To access cabot you will need to have an ingress controller setup (e.g. https://github.com/kubernetes/ingress-nginx), and cert-manager (https://github.com/jetstack/cert-manager). Cert manager should either have a default issuer setup or you need to set the appropriate ingress annotations in values.yaml
+
+You should be able to access it at https://{{ .Values.ingress.hostname }}

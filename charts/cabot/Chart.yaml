@@ -1,0 +1,12 @@
+name: cabot
+version: 0.1.0
+appVersion: 0.11.12
+description: Self-hosted, easily-deployable monitoring and alerts service
+keywords:
+  - cabot
+  - monitoring
+  - alerting
+  - alert
+home: http://cabotapp.com/
+maintainers:
+  - name: frankh

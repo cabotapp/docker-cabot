@@ -47,6 +47,14 @@ To apply them, create a configuration file as above (e.g. conf/production.env) a
 
 This will create all the deployments and services you need including the database. It create's an ingress with SSL enabled using [https://github.com/jetstack/cert-manager](cert-manager) - you may wish to change the ingress or change the `web-service` to be a loadbalancer or node port
 
+## Using Helm
+
+Cabot can now be installed using [Helm](https://github.com/kubernetes/helm).
+
+Simply clone the repository and run
+
+`helm install charts/cabot --set ingress.hostname=cabot.example.com`
+
 # Using docker-compose
 
 You can set up a complete cabot stack easily using docker-compose.

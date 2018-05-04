@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}-web
+  labels:
+    app: {{ template "name" . }}-web
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.webReplicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "name" . }}-web
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+          - sh
+          - -c
+          - cabot migrate && gunicorn cabot.wsgi:application -b 0.0.0.0:5000 --workers=5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          envFrom:
+          - configMapRef:
+              name: {{ template "fullname" . }}-config
+          env:
+          - name: DATABASE_URL
+            value: postgres://cabot:cabot@{{ .Release.Name }}-postgresql:5432/cabot
+          - name: CELERY_BROKER_URL
+            value: amqp://cabot:cabot@{{ .Release.Name }}-rabbitmq:5672//
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}
