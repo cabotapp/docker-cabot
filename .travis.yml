@@ -1,0 +1,9 @@
+services: docker
+script:
+  - cp conf/production.env.example conf/production.env
+  - docker-compose up -d
+  - sleep 15
+  - >
+    curl --silent localhost:5000/setup/ \
+     | grep --quiet "<title>Cabot by Arachnys</title>"
+  - docker-compose down
