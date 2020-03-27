@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cabotapp/docker-cabot.svg?branch=master)](https://travis-ci.org/cabotapp/docker-cabot)
+
 # Supported tags and respective Dockerfile links
 
 - `0.11.12`, `latest` [(0.11.12/Dockerfile)](https://github.com/cabotapp/docker-cabot/blob/0.11.12/Dockerfile)
