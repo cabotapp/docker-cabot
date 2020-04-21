@@ -36,9 +36,11 @@ services:
     restart: always
 
   postgres:
-    image: postgres:9.6.16-alpine
+    image: postgres:9.6-alpine
     volumes:
       - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
     restart: always
 
   rabbitmq:
