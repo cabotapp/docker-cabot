@@ -11,3 +11,4 @@ services:
     volumes:
       - ./.caddy:/root/.caddy
       - ./conf/Caddyfile:/etc/Caddyfile
+    restart: always
